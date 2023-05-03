@@ -10,12 +10,12 @@ const tryCatchWrapper =
     }
   };
 
-export default (methodsObject: object) => {
-  const newMethodsObject = Object.assign(
+export default (requestHandlersObj: Record<string, any>) => {
+  const newRequestHandlersObj = Object.assign(
     {},
-    ...Object.keys(methodsObject).map(k => ({
-      [k]: tryCatchWrapper(methodsObject[k as keyof object]),
+    ...Object.keys(requestHandlersObj).map(k => ({
+      [k]: tryCatchWrapper(requestHandlersObj[k as keyof Record<string, any>]),
     }))
   );
-  return newMethodsObject;
+  return newRequestHandlersObj;
 };

@@ -1,5 +1,5 @@
 import { RequestHandler, Request, Response } from 'express';
-import Todo, { ITodo } from './model';
+import Todo, { TodoI } from './model';
 import asyncWrapper from '../../lib/try-catch-wrapper';
 
 interface RequestParams {
@@ -32,7 +32,7 @@ const getTodos = async (
 ) => {
   const { limit = '0', page = '0', tag } = req.query;
 
-  let filter: any = {};
+  let filter: Record<string, any> = {};
   if (tag) filter.tags = tag;
 
   const todos = await Todo.find(filter)
@@ -56,7 +56,7 @@ const createTodo = async (req: Request<{}, {}, RequestBody>, res: Response) => {
     return res.status(400).json({ Error: 'The title field is required' });
   }
 
-  const todo: ITodo = new Todo(req.body);
+  const todo: TodoI = new Todo(req.body);
   await todo.save();
   res.json(todo);
 };

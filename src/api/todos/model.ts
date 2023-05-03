@@ -1,6 +1,6 @@
 import mongoose, { Document } from 'mongoose';
 
-export interface ITodo extends Document {
+export interface TodoI extends Document {
   title: string;
   complete: boolean;
   tags: string[];
@@ -22,4 +22,4 @@ let todoSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model<ITodo>('Todo', todoSchema);
+export default mongoose.model<TodoI>('Todo', todoSchema);
